@@ -25,11 +25,9 @@ For building the image, [GNU make](https://www.gnu.org/software/make/) and [Go](
 
 ## Deploying the Webhook Server
 
-1. Bring up a Kubernetes cluster satisfying the above prerequisites, and make
-sure it is active (i.e., either via the configuration in the default location, or by setting
-the `KUBECONFIG` environment variable).
-2. Run `./deploy.sh`. This will create a CA, a certificate and private key for the webhook server,
-and deploy the resources in the newly created `webhook-demo` namespace in your Kubernetes cluster.
+1. Make sure the `kind` executable is accessible from your shell 
+2. Run `./deploy.sh`. This will sping up the cluster with the correct config, create a CA, a certificate and private key
+for the webhook server, and deploy the resources in the newly created `webhook-demo` namespace in your `kind` cluster.
 
 
 ## Verify
