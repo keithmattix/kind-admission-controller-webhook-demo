@@ -7,7 +7,8 @@ The logic of this demo webhook is fairly simple: it enforces more secure default
 containers as non-root user. While it is still possible to run containers as root, the webhook
 ensures that this is only possible if the setting `runAsNonRoot` is *explicitly* set to `false`
 in the `securityContext` of the Pod. If no value is set for `runAsNonRoot`, a default of `true`
-is applied, and the user ID defaults to `1234`.
+is applied, and the user ID defaults to `1234`. The scripts in this repo assume that `kind` is installed
+and in your `PATH`.
 
 ## Prerequisites
 

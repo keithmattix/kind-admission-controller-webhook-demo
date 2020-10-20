@@ -23,6 +23,9 @@ set -euo pipefail
 basedir="$(dirname "$0")/deployment"
 keydir="$(mktemp -d)"
 
+# Use k8s version 1.17.11 since 1.19 has a weird cert incompatibility with the demo
+kind create cluster --name mutating-webhook-demo --config kind-config.yaml --image kindest/node:v1.17.11
+
 # Generate keys into a temporary directory.
 echo "Generating TLS keys ..."
 "${basedir}/generate-keys.sh" "$keydir"
@@ -45,5 +48,7 @@ sed -e 's@${CA_PEM_B64}@'"$ca_pem_b64"'@g' <"${basedir}/deployment.yaml.template
 
 # Delete the key directory to prevent abuse (DO NOT USE THESE KEYS ANYWHERE ELSE).
 rm -rf "$keydir"
+
+kubectl config set-context --current --namespace=webhook-demo
 
 echo "The webhook server has been deployed and configured!"
